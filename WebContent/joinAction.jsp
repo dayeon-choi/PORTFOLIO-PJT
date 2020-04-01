@@ -4,7 +4,8 @@
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="user" class="user.User" scope="page" />
+<!-- userDTO함수 생성 -->
+<jsp:useBean id="user" class="user.UserDTO" scope="page" />
 <jsp:setProperty name="user" property="userID" />
 <jsp:setProperty name="user" property="userPassword" /> 
 <jsp:setProperty name="user" property="userName" />
@@ -21,13 +22,16 @@
 	<%
 		PrintWriter script = response.getWriter();
 		System.out.println("1");
-		if (user.getUserID() == null || user.getUserPassword() == null || user.getUserName() == null || user.getUserGender() == null || user.getUserEmail() == null){
+		
+		if (user.getUserID() == null | user.getUserPassword() == null | user.getUserName() == null | user.getUserGender() == null | user.getUserEmail() == null){
 			System.out.println("4");
 			script.println("<script>");
+			
 			script.println("alert('입력이 안 된 사항이 있습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}else{
+			
 			UserDAO userDAO = new UserDAO();//인스턴스 생성
 			int result = userDAO.join(user);
 			
@@ -41,7 +45,7 @@
 				script.println("location.href='main.jsp'");
 				script.println("</script>");
 			}
-		}	
+		}
 	%>
 	</body>
 </html>

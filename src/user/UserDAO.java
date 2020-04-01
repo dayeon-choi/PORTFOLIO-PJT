@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class UserDAO {// dao : 데이터베이스 접근 객체
-	String url = "jdbc:mysql://localhost:3306/jspproject?serverTimezone=UTC&user=root&password=2399";
+	String url = "jdbc:mysql://localhost:3307/jspproject?serverTimezone=UTC&user=root&password=jenny8100";
 	Connection conn=null;
 	PreparedStatement pstmt=null;
 	Statement stmt=null;
@@ -29,7 +29,7 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 	
 	// 로그인을 시도하는 메서드 : 회원 아이디, 비번 체크
 	public int login(String userID, String userPassword) {
-		int x=-1;
+		int x = -1;
 		String SQL = "SELECT userPassword FROM userlist WHERE userID = ?";
 		try {
 			//물음표해당하는 내용을 유저아이디로 1)존재하는지 2)비밀번호무엇인지						
@@ -51,7 +51,7 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 	}//end of login()
 	
 	//회원가입 시도하는 메서드
-	public int join(User user) {
+	public int join(UserDTO user) {
 		String SQL = "INSERT INTO userlist VALUES(?,?,?,?,?)";
 		int x = -1;
 		try {
