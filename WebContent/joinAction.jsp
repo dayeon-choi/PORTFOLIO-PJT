@@ -33,8 +33,9 @@
 		}else{
 			
 			UserDAO userDAO = new UserDAO();//인스턴스 생성
-			int result = userDAO.join(user);
+			int result = userDAO.join(user); //데이터베이스 삽입
 			
+			//join함수내에서 자동으로 중복값이 걸러짐.(중복값이 있는경우 튕김)
 			if(result==-1){
 				script.println("<script>");
 				script.println("alert('이미 존재하는 아이디 입니다.')");
@@ -42,7 +43,7 @@
 				script.println("</script>");
 			}else{//가입 성공
 				script.println("<script>");
-				script.println("location.href='main.jsp'");
+				script.println("location.href='login.jsp'");
 				script.println("</script>");
 			}
 		}

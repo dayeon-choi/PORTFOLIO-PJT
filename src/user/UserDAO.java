@@ -39,19 +39,23 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 			
 			if (rs.next()) {
 				if (rs.getString(1).equals(userPassword)) {
-					x=1; //인증성공
-				} else
-					x=0; //비밀번호 불일치
+					x = 1; //인증성공
+					return x;
+				} else x = 0; //비밀번호 불일치
+					return x;
 			}
-			x=-1; //해당 아이디가 없음
+			
+			x = -1; //해당 아이디가 없음
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return x;
 	}//end of login()
 	
+	
 	//회원가입 시도하는 메서드
 	public int join(UserDTO user) {
+		//ID가 기본키이기 때문에 중복값이 있을 경우 데이터가 들어가지 않는다.
 		String SQL = "INSERT INTO userlist VALUES(?,?,?,?,?)";
 		int x = -1;
 		try {
@@ -63,7 +67,7 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 			pstmt.setString(5, user.getUserEmail());
 			x=pstmt.executeUpdate();
 		}catch(Exception e) {
-			e.printStackTrace();
+			x = -1; //오류 신호 반환
 		}
 		return x;
 	}
