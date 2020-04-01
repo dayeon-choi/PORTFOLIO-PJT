@@ -39,9 +39,9 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 			
 			if (rs.next()) {
 				if (rs.getString(1).equals(userPassword)) {
-					x=1; //인증성공
+					x=1; return x;//인증성공
 				} else
-					x=0; //비밀번호 불일치
+					x=0; return x;//비밀번호 불일치
 			}
 			x=-1; //해당 아이디가 없음
 		} catch (Exception e) {
