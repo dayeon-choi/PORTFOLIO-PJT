@@ -7,34 +7,33 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class UserDAO {// dao : 데이터베이스 접근 객체
-	String url = "jdbc:mysql://localhost:3306/jspproject?serverTimezone=UTC&user=root&password=2399";
-	Connection conn=null;
-	PreparedStatement pstmt=null;
-	Statement stmt=null;
-	ResultSet rs = null;
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String id = "dayeon";
+	String pw = "2399";
 
 	public UserDAO() { // 생성자 실행될때마다 자동으로 db연결이 이루어 질 수 있도록함
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			System.out.println("드라이버 연결 성공!");
-			conn = DriverManager.getConnection(url);
-			System.out.println("데이터 베이스 접속 성공!");
-			stmt = conn.createStatement();
-			String usejspproject = "use jspproject;";
-			stmt.executeUpdate(usejspproject);
+			Class.forName(driver);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	// 로그인을 시도하는 메서드 : 회원 아이디, 비번 체크
-	public int login(String userID, String userPassword) {
+	public int login(String userID, String userPassword) {	
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
 		int x=-1;
 		String SQL = "SELECT userPassword FROM userlist WHERE userID = ?";
 		try {
-			//물음표해당하는 내용을 유저아이디로 1)존재하는지 2)비밀번호무엇인지						
+			conn = DriverManager.getConnection(url, id, pw);
+			System.out.println("드라이버 연결 성공!");
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
+			System.out.println("데이터 베이스 접속 성공!");
+			pstmt.setString(1, userID);//물음표해당하는 내용을 유저아이디로 1)존재하는지 2)비밀번호무엇인지			
 			rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
@@ -52,10 +51,16 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 	
 	//회원가입 시도하는 메서드
 	public int join(User user) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		
 		String SQL = "INSERT INTO userlist VALUES(?,?,?,?,?)";
 		int x = -1;
 		try {
-			pstmt=conn.prepareStatement(SQL);
+			conn = DriverManager.getConnection(url, id, pw);
+			System.out.println("드라이버 연결 성공!");
+			pstmt = conn.prepareStatement(SQL);
+			System.out.println("데이터 베이스 접속 성공!");
 			pstmt.setString(1, user.getUserID());
 			pstmt.setString(2, user.getUserPassword());
 			pstmt.setString(3, user.getUserName());
@@ -70,10 +75,16 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 	
 	//ID를 찾기를 시도하는 메서드
 	public String findId(String userName, String userGender, String userEmail) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
 		String s="";     //String SQL설명 : userlist에서 userName, userGender, userEmail이 ?인 ID값
 		String SQL = "SELECT userID FROM userlist WHERE userName = ? AND userGender = ? AND userEmail = ?";
 		try {
-			pstmt=conn.prepareStatement(SQL);
+			conn = DriverManager.getConnection(url, id, pw);
+			System.out.println("드라이버 연결 성공!");
+			pstmt = conn.prepareStatement(SQL);
+			System.out.println("데이터 베이스 접속 성공!");
 			pstmt.setString(1,userName);
 			pstmt.setString(2,userGender);
 			pstmt.setString(3,userEmail);
