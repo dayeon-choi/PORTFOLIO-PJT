@@ -16,7 +16,7 @@
 		            <div class="row">
 		                <div class="col-lg-6 col-md-8 mx-auto">
 						<div class="jumbotron">
-							<form method="post" action="loginAction.jsp">
+							<form method="post" action="loginAction">
 								<h3 class="text-secondary" style="text-align:center;">PORTFOLIO</h3>
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
