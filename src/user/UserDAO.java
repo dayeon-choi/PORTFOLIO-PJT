@@ -110,4 +110,46 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 		
 		return x;//결과 반환
 	}
+	
+	
+	//아이디 존재 여부 확인 메서드 (비밀번호 찾기)
+	public int findID_infindpw(String userID) {
+		System.out.println("user.UserDAO.findID() running...");
+		int sign = -1;
+		
+		//프로그램 실행시 용량과 효율에 따라 지역변수로 선언
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		int x = -1;
+		String SQL = "SELECT * FROM userlist WHERE userID = ?";
+		try {
+			conn = DriverManager.getConnection(url, id, pw);
+			
+			//물음표해당하는 내용을 유저아이디로 1)존재하는지 2)비밀번호무엇인지						
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) { //레코드 존재할 경우
+				sign = 1;
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			x = -2; //데이터베이스 오류
+		}finally {
+			try { //연결 해제
+				if(rs!= null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+				x = -2; //데이터베이스 오류
+			}
+		}
+				
+		return sign; //아이디가 존재할 경우 1 반환	
+	}
 }
