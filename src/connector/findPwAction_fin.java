@@ -47,10 +47,7 @@ public class findPwAction_fin extends HttpServlet {
 				script.println("location.replace('login.jsp')");
 				script.println("</script>");
 			}
-			
 		}
-		
-		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

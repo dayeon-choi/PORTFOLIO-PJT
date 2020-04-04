@@ -161,7 +161,7 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;
 		
-		String pwd = null;
+		String pwd = "er";
 		
 		
 		String SQL = "SELECT userName, userEmail, userPassword FROM userlist WHERE userID = ?";
@@ -181,7 +181,7 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
-			pwd = null; //데이터베이스 오류
+			pwd = "erd"; //데이터베이스 오류
 		}finally {
 			try { //연결 해제
 				if(rs!= null) rs.close();
@@ -189,12 +189,51 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 				if(conn!=null) conn.close();
 			}catch (Exception e2) {
 				e2.printStackTrace();
-				pwd = null; //데이터베이스 오류
+				pwd = "erd"; //데이터베이스 오류
 			}
 		}
 		
 		return pwd;
 	}
+	
+	
+	public String pwQues1, pwQues1_aw, pwQues2, pwQues2_aw;
+	
+	//질문과 답 반환
+	public void getQuestions(String userID) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		String SQL = "SELECT pwQues1, pwQues1_aw, pwQues2, pwQues2_aw FROM userlist WHERE userID = ?";
+		
+		try {
+			conn = DriverManager.getConnection(url, id, pw);
+			
+			//물음표해당하는 내용을 유저아이디로 1)존재하는지 2)비밀번호무엇인지						
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) { //레코드 존재할 경우
+				pwQues1 = rs.getString("pwQues1");
+				pwQues1_aw = rs.getString("pwQues1_aw"); 
+				pwQues2 = rs.getString("pwQues2");
+				pwQues2_aw = rs.getString("pwQues2_aw");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try { //연결 해제
+				if(rs!= null) rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null) conn.close();
+			}catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 	
 	
 	public int changePW(String userID, String newPW) {
