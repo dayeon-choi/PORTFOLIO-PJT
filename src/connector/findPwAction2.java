@@ -14,25 +14,32 @@ import javax.servlet.http.HttpSession;
 
 import user.UserDAO;
 
-@WebServlet("/findPwAction1")
+@WebServlet("/findPwAction2")
 public class findPwAction2 extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter script = response.getWriter();
+		request.setCharacterEncoding("UTF-8"); //FORM이 'POST'방식일 때
+		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
+		PrintWriter script = response.getWriter();
 		
-		System.out.println("doget메서드");
-		String userID = request.getParameter("userID");		
+		String userName = request.getParameter("userName");
+		String userEmail = request.getParameter("userEmail");
 		
-		if((new UserDAO()).findID_infindpw(userID)==1) {
-			//아이디 정보 존재
-			session.setAttribute("userID", userID);
+		UserDAO temp = new UserDAO();
+		
+		String sign = temp.findInfo_infindpw((String)session.getAttribute("userID"), userName, userEmail);
+		
+		if(!(sign.equals(null))) {
+			session.setAttribute("userPW", sign);
+			System.out.println("유저 패스워드 setAtt: "+session.getAttribute("userPW"));
+			response.sendRedirect("findPassword_fin.jsp");
 		}else {
-			//아이디 정보 없음 
-			session.setAttribute("checkID", "false");
+			script.println("<script>");
+			script.println("alert('DB오류가 발생했습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
 		}
-		
-		response.sendRedirect("findPassword.jsp");
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

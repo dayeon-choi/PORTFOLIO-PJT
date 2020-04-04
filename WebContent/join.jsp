@@ -60,7 +60,7 @@
 								
 								<!-- 아이디ID input -->
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
+									<input type="text" class="form-control" placeholder="아이디" name="userID" >
 									<p class="text-danger"></p>
 								</div>
 								
