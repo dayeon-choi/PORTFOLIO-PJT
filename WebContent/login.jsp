@@ -29,6 +29,7 @@
 									<nav aria-label="breadcrumb">
 									  <ol class="breadcrumb">
 									    <li class="breadcrumb-item"><a href="join.jsp" class="text-secondary">회원 가입</a></li>
+								      	<li class="breadcrumb-item"><a href="findId.jsp" class="text-secondary">아이디 찾기</a></li>	
 									    <li class="breadcrumb-item"><a href="findPassword.jsp" class="text-secondary">비밀번호 찾기</a></li>
 									  </ol>
 									</nav>

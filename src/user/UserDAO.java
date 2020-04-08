@@ -68,6 +68,36 @@ public class UserDAO {// dao : 데이터베이스 접근 객체
 	}//end of login()
 	
 	
+	//ID를 찾기를 시도하는 메서드
+	public String findId(String userName, String userGender, String userEmail) {
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		
+		String s="";     //String SQL설명 : userlist에서 userName, userGender, userEmail이 ?인 ID값
+		String SQL = "SELECT userID FROM userlist WHERE userName = ? AND userGender = ? AND userEmail = ?";
+		try {
+			conn = DriverManager.getConnection(url, id, pw);
+			
+			pstmt=conn.prepareStatement(SQL);
+			pstmt.setString(1,userName);
+			pstmt.setString(2,userGender);
+			pstmt.setString(3,userEmail);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				s=(rs.getString("userID")); return s;
+			}else {
+				return null;//해당 아이디가 없음
+			}
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 	
 	//회원가입 시도 메서드
 	public int join(UserDTO user) {
