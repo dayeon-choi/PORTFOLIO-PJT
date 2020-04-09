@@ -4,7 +4,7 @@
 <%@ page import="java.io.PrintWriter" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="user" class="user.UserDTO" scope="page" />
 <jsp:setProperty name="user" property="userName" />
 <jsp:setProperty name="user" property="userGender" />
 <jsp:setProperty name="user" property="userEmail" />
@@ -33,7 +33,7 @@
 								script.println("</script>");
 							}else{
 								UserDAO userDAO = new UserDAO();//인스턴스 생성
-								String result = userDAO.findId(user.getUserName(), user.getUserGender(),user.getUserEmail());
+								String result = userDAO.findId(user.getUserName(), user.getUserGender(), user.getUserEmail());
 								
 								if(result==null){
 									script.println("<script>");

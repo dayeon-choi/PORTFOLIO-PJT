@@ -4,7 +4,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<title>IntoLogin</title>
 	</head>
 	<body class="p-3 mb-2 bg-secondary text-white">
@@ -15,7 +16,7 @@
 		            <div class="row">
 		                <div class="col-lg-6 col-md-8 mx-auto">
 						<div class="jumbotron">
-							<form method="post" action="loginAction.jsp">
+							<form method="post" action="loginAction">
 								<h3 class="text-secondary" style="text-align:center;">PORTFOLIO</h3>
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="아이디" name="userID" maxlength="20">
@@ -28,7 +29,7 @@
 									<nav aria-label="breadcrumb">
 									  <ol class="breadcrumb">
 									    <li class="breadcrumb-item"><a href="join.jsp" class="text-secondary">회원 가입</a></li>
-									    <li class="breadcrumb-item"><a href="findId.jsp" class="text-secondary">아이디 찾기</a></li>
+								      	<li class="breadcrumb-item"><a href="findId.jsp" class="text-secondary">아이디 찾기</a></li>	
 									    <li class="breadcrumb-item"><a href="findPassword.jsp" class="text-secondary">비밀번호 찾기</a></li>
 									  </ol>
 									</nav>
