@@ -14,25 +14,52 @@ import javax.servlet.http.HttpSession;
 
 import user.UserDAO;
 
-@WebServlet("/findPwAction1")
+@WebServlet("/findPwAction2")
 public class findPwAction2 extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter script = response.getWriter();
+		request.setCharacterEncoding("UTF-8"); //FORM이 'POST'방식일 때
+		response.setContentType("text/html; charset=UTF-8");
 		HttpSession session = request.getSession();
+		PrintWriter script = response.getWriter();
 		
-		System.out.println("doget메서드");
-		String userID = request.getParameter("userID");		
+		String userID = (String)session.getAttribute("userID");
+		String userName = request.getParameter("userName");
+		String userEmail = request.getParameter("userEmail");
 		
-		if((new UserDAO()).findID_infindpw(userID)==1) {
-			//아이디 정보 존재
-			session.setAttribute("userID", userID);
-		}else {
-			//아이디 정보 없음 
-			session.setAttribute("checkID", "false");
+		
+		UserDAO temp = new UserDAO();
+		
+		//정보맞는지 확인
+		String sign = temp.findInfo_infindpw(userID, userName, userEmail);
+		
+		if(sign.equals("er")) {
+			script.println("<script>");
+			script.println("alert('정보가 일치하지 않습니다.')");
+			script.println("history.back()");
+			script.println("</script>");
 		}
-		
-		response.sendRedirect("findPassword.jsp");
+		else if(sign.equals("erd")) {
+			script.println("<script>");
+			script.println("alert('데이터베이스 오류입니다.')");
+			script.println("history.back()");
+			script.println("</script>");
+		}
+		else {
+			session.setAttribute("userPW", sign);
+			session.setAttribute("userName", userName);
+			session.setAttribute("userEmail", userEmail);
+			
+			//해당 아이디의 질문과 답 가져오기(DB) session에 저장
+			temp.getQuestions(userID);
+			session.setAttribute("pwQues1", temp.pwQues1);
+			session.setAttribute("pwQues1_aw", temp.pwQues1_aw);
+			session.setAttribute("pwQues2", temp.pwQues2);
+			session.setAttribute("pwQues2_aw", temp.pwQues2_aw);
+			
+			System.out.println("유저 패스워드 setAtt: "+session.getAttribute("userPW"));
+			response.sendRedirect("findPassword3.jsp");
+		}
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

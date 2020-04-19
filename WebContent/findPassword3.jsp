@@ -26,22 +26,21 @@
 							<br>
 							
 							<!-- 정보 입력창 -->
-							<form method="post" action="findPwAction2" id="getInfojumbo">
-								<label class="text-secondary"><%= session.getAttribute("userID") %>&nbsp;계정 정보 확인</label>
-								<div class="form-inline">
-									<label class="text-secondary">이름 입력</label>
-									<div class="form-group mx-sm-3 mb-2">
-									   <input type="text" name="userName" class="form-control" maxlength="5">
-								  	</div>
+							<form method="post" action="findPwAction3" id="getInfojumbo">
+								<div class="form-group">
+									<label class="text-secondary"><%= session.getAttribute("userID") %>&nbsp;계정 정보 확인</label>
 								</div>
-								<div class="form-inline">
-									<label class="text-secondary">메일주소 입력</label>
-									<div class="form-group mx-sm-3 mb-2">
-									   <input type="text" name="userEmail" class="form-control" maxlength="50">
-								  	</div>
-								</div>
-								<br>
-  								<button type="submit" class="btn-secondary btn btn-primary mb-2">다음</button>
+								<div class="form-group">
+								<label class="text-secondary">질문1)&nbsp;<%= session.getAttribute("pwQues1")%></label>
+								   <input type="text" name="pwQues1_aw" placeholder="답" class="form-control" maxlength="50">
+							  	</div>
+							
+								<div class="form-group">
+								<label class="text-secondary">질문2)&nbsp;<%= session.getAttribute("pwQues2")%></label>
+								   <input type="text" name="pwQues2_aw" placeholder="답" class="form-control" maxlength="50">
+							  	</div>
+								
+  								<button type="submit" class="btn-secondary btn btn-primary form-control">다음</button>
 							</form>
 							
 							

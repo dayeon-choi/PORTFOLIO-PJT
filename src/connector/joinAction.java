@@ -63,8 +63,8 @@ public class joinAction extends HttpServlet {
 				System.out.println(user_t);
 				script.println("<script>");
 				script.println("alert('회원가입이 완료되었습니다. 로그인 창으로 이동합니다.')"); //작동 안됨
+				script.println("location.replace('login.jsp')");
 				script.println("</script>");
-				response.sendRedirect("login.jsp"); //회원가입 완료
 			}
 			
 		}

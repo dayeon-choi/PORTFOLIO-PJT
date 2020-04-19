@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ page import="java.io.PrintWriter" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	PrintWriter script = response.getWriter();
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,21 +14,10 @@
 			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<meta charset="EUC-KR">
 	<title>Find Password</title>
+	
+	
 	</head>
 	<body class="p-3 mb-2 bg-secondary text-white">
-	
-	
-	<script>
-		$(document).ready(function(){
-			$("#getInfojumbo").hide();
-			
-			if(<%= session.getAttribute("userID") %>!=null){
-				$("#getIDjumbo").hide();
-			}else if(<%= session.getAttribute("checkID") %>!=null){
-				alert("존재하지 않는 아이디입니다.");
-			}
-		});
-	</script>
 	
 		<div class="container">
 			<div class="row">
@@ -42,30 +35,11 @@
 								<div class="form-inline">
 									<label class="text-secondary">아이디 입력</label>
 									<div class="form-group mx-sm-3 mb-2">
-									   <input type="text" name="userID" class="form-control" >
+									   <input type="text" name="userID" class="form-control" maxlength="20">
 								  	</div>
 	  								<button type="submit" class="btn-secondary btn btn-primary mb-2">다음</button>
 								</div>
 							</form>
-							
-							<!-- 정보 입력창 -->
-							<form method="post" action="findPwAction2" id="getInfojumbo">
-								<label class="text-secondary"><%= session.getAttribute("userID") %>&nbsp;계정 정보 확인</label>
-								<div class="form-inline">
-									<label class="text-secondary">이름 입력</label>
-									<div class="form-group mx-sm-3 mb-2">
-									   <input type="text" name="userID" class="form-control" >
-								  	</div>
-								</div>
-								<div class="form-inline">
-									<label class="text-secondary">메일주소 입력</label>
-									<div class="form-group mx-sm-3 mb-2">
-									   <input type="text" name="userID" class="form-control" >
-								  	</div>
-								</div>
-  								<button type="submit" class="btn-secondary btn btn-primary mb-2">다음</button>
-							</form>
-							
 							
 						</div>
 						
@@ -75,22 +49,7 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</body>
 </html>
-
-<!-- 
-				<div class="form-group row">
-								  <label for="staticEmail" class="col-sm-2 col-form-label">아이디</label>
-								  <div class="col-sm-10">
-								    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-								  </div>
-								</div>
-								<div class="form-group row">
-								  <label for="inputPassword" class="col-sm-2 col-form-label">이름</label>
-								  <div class="col-sm-10">
-								    <input type="password" class="form-control" id="inputPassword">
-								  </div>
-								</div>
-				
-				
-				 -->

@@ -19,7 +19,7 @@ public class UserDTO {//회원데이터 자바빈즈
 		this.userEmail = email;
 		this.pwQues1 = pwQues1;
 		this.pwQues1_aw = pwQues1_aw;
-		this.pwQues2 = pwQues2_aw;
+		this.pwQues2 = pwQues2;
 		this.pwQues2_aw = pwQues2_aw;
 	}
 	
@@ -117,9 +117,4 @@ public class UserDTO {//회원데이터 자바빈즈
 				+ ", userGender=" + userGender + ", userEmail=" + userEmail + ", pwQues1=" + pwQues1 + ", pwQues1_aw="
 				+ pwQues1_aw + ", pwQues2=" + pwQues2 + ", pwQues2_aw=" + pwQues2_aw + "]";
 	}
-
-
-	
-	
-	
 }
