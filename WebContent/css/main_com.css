@@ -8,6 +8,7 @@
 body{
     background-color: #6C757D;
     margin: 0;
+    overflow:hidden;
 }
 
 header{
@@ -34,6 +35,7 @@ header{
 
 #sections{
     margin: 20px 40px;
+    min-width: 700px;
 }
 
 .nav-link{

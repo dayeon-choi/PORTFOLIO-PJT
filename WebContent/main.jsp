@@ -29,7 +29,7 @@
 	<body style="background-color: #6C757D; margin: 0;">
 	    <header>
 	        <h2 id="headerh2">PORTFOLIO</h2>
-	        <img id="head-img" src="media/profile2.png">
+	        <img id="head-img" src="images/profile2.png">
 	    </header>
 	
 	    <section>
